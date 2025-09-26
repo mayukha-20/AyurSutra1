@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 
@@ -89,9 +90,9 @@ const AdminDashboard = () => {
                   </span>
                 </div>
               </div>
-              <button className="w-full mt-4 btn-primary">
-                Manage All Centers
-              </button>
+              <Link to="/admin/centers" className="w-full mt-4 btn-primary inline-block text-center">
+                Manage Centers
+              </Link>
             </div>
 
             {/* Practitioner Management */}
@@ -119,9 +120,9 @@ const AdminDashboard = () => {
                   </span>
                 </div>
               </div>
-              <button className="w-full mt-4 btn-primary">
-                Manage All Practitioners
-              </button>
+              <Link to="/admin/practitioners" className="w-full mt-4 btn-primary inline-block text-center">
+                Manage Practitioners
+              </Link>
             </div>
 
             {/* Recent Activity */}
@@ -160,18 +161,12 @@ const AdminDashboard = () => {
                 Quick Actions
               </h2>
               <div className="grid grid-cols-2 gap-3">
-                <button className="p-3 bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors">
+                <Link to="/admin/centers" className="p-3 bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors text-center">
                   Add Center
-                </button>
-                <button className="p-3 bg-green-50 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-lg hover:bg-green-100 dark:hover:bg-green-800 transition-colors">
+                </Link>
+                <Link to="/admin/practitioners" className="p-3 bg-green-50 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-lg hover:bg-green-100 dark:hover:bg-green-800 transition-colors text-center">
                   Verify Practitioner
-                </button>
-                <button className="p-3 bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-800 transition-colors">
-                  Generate Report
-                </button>
-                <button className="p-3 bg-orange-50 dark:bg-orange-900 text-orange-700 dark:text-orange-300 rounded-lg hover:bg-orange-100 dark:hover:bg-orange-800 transition-colors">
-                  System Settings
-                </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -32,6 +32,7 @@ const PractitionerDashboardImproved = () => {
   const [historyOpen, setHistoryOpen] = useState(false);
   const [recentFilter, setRecentFilter] = useState("today");
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [patientFeedbackMap, setPatientFeedbackMap] = useState({});
 
   // Helpers
   const isSameDay = (d1, d2) =>
@@ -180,6 +181,22 @@ const PractitionerDashboardImproved = () => {
       window.removeEventListener('patientBookingAdded', handleBookingUpdate);
     };
   }, []);
+
+  useEffect(() => {
+    async function fetchFeedback() {
+      if (!historyOpen || !selectedPatientId) return;
+      try {
+        const res = await fetch(`/api/feedback/patient/${selectedPatientId}`);
+        const data = await res.json();
+        if (data.success) {
+          setPatientFeedbackMap((prev) => ({ ...prev, [String(selectedPatientId)]: data.feedback || [] }));
+        }
+      } catch (e) {
+        console.error('Failed to load patient feedback', e);
+      }
+    }
+    fetchFeedback();
+  }, [historyOpen, selectedPatientId]);
 
   const patients = useMemo(() => {
     const unique = new Map();
@@ -627,7 +644,7 @@ const PractitionerDashboardImproved = () => {
         therapyNotes={therapyNotes.filter((n) =>
           appointments.some((a) => String(a.patientId) === String(selectedPatientId) && String(a.id) === String(n.appointmentId))
         )}
-        feedback={[]}
+        feedback={patientFeedbackMap[String(selectedPatientId)] || []}
       />
 
       {/* Custom Styles for Consistent Theme */}

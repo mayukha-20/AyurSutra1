@@ -17,6 +17,11 @@ import PractitionerDashboard from './pages/PractitionerDashboard';
 import ProgressDashboardAyursutra from './pages/ProgressDashboardAyursutra';
 import TestCredentials from './pages/TestCredentials';
 
+// Admin V2 Pages (additive)
+import AdminCentersV2 from './pages/admin/v2/AdminCentersV2';
+import AdminPractitionersV2 from './pages/admin/v2/AdminPractitionersV2';
+import AdminDetailedReportV2 from './pages/admin/v2/AdminDetailedReportV2';
+
 // Protected Route Component
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, loading } = useAuth();
@@ -106,6 +111,14 @@ function App() {
                 </ProtectedRoute>
               } />
 
+              <Route path="/admin/centers" element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <Layout>
+                    <AdminCentersV2 />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
               <Route path="/practitioner/dashboard" element={
                 <ProtectedRoute allowedRoles={['practitioner']}>
                   <Layout>
@@ -114,10 +127,51 @@ function App() {
                 </ProtectedRoute>
               } />
 
+              <Route path="/admin/practitioners" element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <Layout>
+                    <AdminPractitionersV2 />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
+              <Route path="/admin/report" element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <Layout>
+                    <AdminDetailedReportV2 />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
               <Route path="/patient/progress" element={
                 <ProtectedRoute allowedRoles={['patient']}>
                   <Layout>
                     <ProgressDashboardAyursutra />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
+              {/* Admin V2 routes (additive, non-breaking) */}
+              <Route path="/admin/v2/centers" element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <Layout>
+                    <AdminCentersV2 />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
+              <Route path="/admin/v2/practitioners" element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <Layout>
+                    <AdminPractitionersV2 />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
+              <Route path="/admin/v2/report" element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <Layout>
+                    <AdminDetailedReportV2 />
                   </Layout>
                 </ProtectedRoute>
               } />

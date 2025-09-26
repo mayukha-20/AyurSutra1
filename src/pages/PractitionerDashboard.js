@@ -32,6 +32,7 @@ const PractitionerDashboard = () => {
   const [historyOpen, setHistoryOpen] = useState(false);
   const [recentFilter, setRecentFilter] = useState("today");
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [patientFeedbackMap, setPatientFeedbackMap] = useState({});
 
   // Helpers
   const isSameDay = (d1, d2) =>
@@ -157,6 +158,22 @@ const PractitionerDashboard = () => {
       }
     }
     load();
+
+    // Fetch feedback on selection + open
+    async function fetchFeedback(pid) {
+      if (!pid) return;
+      try {
+        const res = await fetch(`/api/feedback/patient/${pid}`);
+        const data = await res.json();
+        if (data.success) {
+          setPatientFeedbackMap((prev) => ({ ...prev, [String(pid)]: data.feedback || [] }));
+        }
+      } catch (e) {
+        console.error('Failed to load feedback', e);
+      }
+    }
+
+    fetchFeedback(selectedPatientId);
     
     const pollInterval = setInterval(() => {
       if (mounted) {
@@ -410,9 +427,18 @@ const PractitionerDashboard = () => {
                                 </span>
                                 <button 
                                   className="text-amber-700 hover:text-amber-800 text-sm font-medium"
-                                  onClick={(e) => {
+onClick={async (e) => {
                                     e.stopPropagation();
                                     setSelectedPatientId(appointment.patientId);
+                                    try {
+                                      const res = await fetch(`/api/feedback/patient/${appointment.patientId}`);
+                                      const data = await res.json();
+                                      if (data.success) {
+                                        setPatientFeedbackMap((prev) => ({ ...prev, [String(appointment.patientId)]: data.feedback || [] }));
+                                      }
+                                    } catch (e2) {
+                                      console.error('Failed to load feedback', e2);
+                                    }
                                     setHistoryOpen(true);
                                   }}
                                 >
@@ -511,8 +537,17 @@ const PractitionerDashboard = () => {
                     patients={patients} 
                     selectedPatientId={selectedPatientId}
                     onSelect={setSelectedPatientId}
-                    onDetails={(patientId) => {
+onDetails={async (patientId) => {
                       setSelectedPatientId(patientId);
+                      try {
+                        const res = await fetch(`/api/feedback/patient/${patientId}`);
+                        const data = await res.json();
+                        if (data.success) {
+                          setPatientFeedbackMap((prev) => ({ ...prev, [String(patientId)]: data.feedback || [] }));
+                        }
+                      } catch (e) {
+                        console.error('Failed to load feedback', e);
+                      }
                       setHistoryOpen(true);
                     }}
                   />
@@ -635,7 +670,7 @@ const PractitionerDashboard = () => {
         therapyNotes={therapyNotes.filter((n) =>
           appointments.some((a) => String(a.patientId) === String(selectedPatientId) && String(a.id) === String(n.appointmentId))
         )}
-        feedback={[]}
+        feedback={patientFeedbackMap[String(selectedPatientId)] || []}
       />
 
       {/* Custom Styles for Consistent Theme */}

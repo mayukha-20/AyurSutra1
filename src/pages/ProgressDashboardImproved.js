@@ -79,7 +79,19 @@ const ProgressDashboardImproved = () => {
     setSubmittingFeedback(true);
 
     try {
-      // Mock submission
+      // Persist to backend so practitioners can see it
+      await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          patientId,
+          therapyType: feedbackForm.therapyType,
+          symptomSeverity: Number(feedbackForm.symptomSeverity),
+          notes: feedbackForm.notes
+        })
+      });
+
+      // Also reflect immediately in local UI
       const newLog = {
         id: therapyLogs.length + 1,
         date: new Date().toISOString().split('T')[0],
