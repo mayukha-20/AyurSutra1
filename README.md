@@ -1,4 +1,4 @@
-# Ayurveda Wellness Platform
+# AyurSutra 
 
 A responsive React.js application for Ayurvedic therapy booking and wellness guidance with role-based authentication.
 
