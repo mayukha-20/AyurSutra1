@@ -39,6 +39,25 @@ A responsive React.js application for Ayurvedic therapy booking and wellness gui
 - **State Management**: Context API
 - **Icons**: Emoji-based for simplicity
 
+## Website
+<img width="800" height="441" alt="image" src="https://github.com/user-attachments/assets/64b3f36d-5075-4651-b088-b9d8e521eebf" />  
+<img width="800" height="444" alt="image" src="https://github.com/user-attachments/assets/35dd00c6-46ae-4e5a-8ebf-ec1b255930b6" />
+
+
+<img width="800" height="440" alt="image" src="https://github.com/user-attachments/assets/b0bce4fa-d497-4bd7-8651-2d9c2c6e2750" />
+
+<img width="800" height="439" alt="image" src="https://github.com/user-attachments/assets/7da7f006-6b1c-4f22-afb5-f8ed3f228c23" />  
+<img width="800" height="441" alt="image" src="https://github.com/user-attachments/assets/e783e692-ff00-427e-99d9-7ec15f14f22b" />
+
+<img width="800" height="443" alt="image" src="https://github.com/user-attachments/assets/8cab8bfb-644c-43e6-bdd7-7a3bac861960" />  
+<img width="800" height="437" alt="image" src="https://github.com/user-attachments/assets/0878f85d-2711-4e31-9fc4-837a2afbc77f" />
+
+<img width="800" height="445" alt="image" src="https://github.com/user-attachments/assets/da2bb82f-ed4b-400e-9cd4-f9ae7a52e8c7" />  
+<img width="800" height="444" alt="image" src="https://github.com/user-attachments/assets/eec02556-591f-4a1a-ae97-0f4716926291" />
+
+<img width="800" height="441" alt="image" src="https://github.com/user-attachments/assets/c5594b4b-8895-41f5-91d6-7142070682ea" />  
+<img width="800" height="439" alt="image" src="https://github.com/user-attachments/assets/fa06aaf7-f2ce-41dc-8705-b37246bd10ef" />
+
 ## Getting Started
 
 ### Prerequisites
